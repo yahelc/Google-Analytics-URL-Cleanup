@@ -21,7 +21,6 @@ _gaq.push(function() {
 			if (document.cookie.indexOf("__utmz=") != -1) {
 				history.replaceState({},
 				"", newstate);
-				clearInterval(check);
 			}
 	}
 });
