@@ -1,4 +1,7 @@
-(function(location) {
+/*
+* Instructions: Place *after* the Google Analytics Snippet, so this _gaq.push executes after the _gaq.push(["_trackPageview"]); call.
+*/
+_gaq.push(function() {
 	if (window.history && history.replaceState && location.search.match(/utm_/)) {
 		var query = {};
 		location.search.replace(/([^?=&]+)(=([^&]*))?/g, function($0, $1, $2, $3) {
@@ -15,16 +18,10 @@
 			}
 			return location.pathname + ((s.length) ? "?" + s.join("&") : "");
 		} (query));
-		var checks = 0;
-		var check = setInterval(function() {
 			if (document.cookie.indexOf("__utmz=") != -1) {
 				history.replaceState({},
 				"", newstate);
 				clearInterval(check);
-			} else if (++checks > 5) {
-				clearInterval(check);
 			}
-		},
-		500);
 	}
-} (window.location));
+});
